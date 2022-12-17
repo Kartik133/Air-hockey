@@ -18,6 +18,8 @@ function setup() {
 function draw() {
   background(0);
   
+  Engine.update(engine);
+  
   if(mouseY>=width/2) {
     y = mouseX;
   }
