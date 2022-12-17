@@ -12,7 +12,7 @@ function setup() {
   engine = Engine.create();
   world = engine.world;
 
-  ball = new Ball(500,500,20);
+  ball = new Ball(width/2,height/2,20);
 }
 
 function draw() {
