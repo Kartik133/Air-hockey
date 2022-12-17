@@ -12,17 +12,13 @@ function setup() {
   engine = Engine.create();
   world = engine.world;
 
-  ball = new Ball(mouseX,y,20);
+  ball = new Ball(500,500,20);
 }
 
 function draw() {
   background(0);
   
   Engine.update(engine);
-  
-  if(mouseY>=width/2) {
-    y = mouseX;
-  }
 
   ball.display();
 }
