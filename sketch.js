@@ -14,13 +14,18 @@ function setup() {
 
   ball = new Ball(width/2,height/2,20);
 
-  player1 = new Player1(0,0,50,50);
+  player1 = new Player1(0,0,20,20);
 }
 
 function draw() {
   background(0);
   
   Engine.update(engine);
+
+  x= mouseX;
+  if(mouseX>=width/2) {
+    y = mouseX;
+  }
   
   player1.display();
 
