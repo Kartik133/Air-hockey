@@ -1,42 +1,40 @@
-var ball,player1,player2,player1_img,player2_img,x,y,ball_img,edge1,edge2,edge3,edge4,edge5,edge6,edge1_img,edge2_img,edge3_img,edge4_img,edge5_img,edge6_img;
-
-function preload() {
- ball_img = loadImage("ball.gif");
- player1_img = loadImage("player1.gif");
- //player2_img = loadImage("player2.gif");
- //edge1_img = loadImage("edge1.jpg");
-}
+const Engine = Matter.Engine;
+const World = Matter.World;
+const Bodies = Matter.Bodies;
+const Body = Matter.Body;
+var engine,world;
+var player1,y,player2,ground1,ground2,ground3,ground4,ball;
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
 
-  ball = createSprite(width/2,height/2,50,50);
-  ball.addImage(ball_img);
+  engine = Engine.create();
+  world = engine.world;
+  engine.gravity = 0;
 
-  player1 = createSprite(width/2,height/4,100,100);
-  player1.addImage(player1_img);
-
-  player2 = createSprite(width/2,3*height/4,100,100);
-  //player2.addImage(player2_img);
+  player1 = new Player1(width/2,3*height/4,50);
+  player2 = new Player2(width/2,height/4,48.8);
+  ball = new Ball(width/2,height/2,25);
+  ground1 = Bodies.rectangle(width/2,height,width,50,{isStatic:true,restitution:0.8,density:10000});
+  ground2 = Bodies.rectangle(width/2,0,width,50,{isStatic:true,restitution:0.8,density:10000});
+  ground3 = Bodies.rectangle(0,height/2,50,height,{isStatic:true,restitution:0.8,density:10000});
+  ground4 = Bodies.rectangle(width,height/2,50,height,{isStatic:true,restitution:0.8,density:10000});
+  World.add(world,ground1);
+  World.add(world,ground2);
+  World.add(world,ground3);
+  World.add(world,ground4);
 }
 
 function draw() {
   background(0);
 
-  player2.x = mouseX;
+  Engine.update(engine);
 
   if(mouseY>=height/2) {
-    player2.y = mouseY;
+    y = mouseY;
   }
-
-  drawSprites();
-
-  ball.bounce(player1);
-  ball.bounce(player2);
-  /*ball.bounceOff(edge1);
-  ball.bounceOff(edge2);
-  ball.bounceOff(edge3);
-  ball.bounceOff(edge4);
-  ball.bounceOff(edge5);
-  ball.bounceOff(edge6);*/
+  
+  player1.display();
+  player2.display();
+  ball.display();
 }
